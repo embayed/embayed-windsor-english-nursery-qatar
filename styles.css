@@ -278,3 +278,105 @@ footer a:hover { color: #fff; }
   line-height: 1.8;
 }
 
+/* ── Floating Social Buttons ── */
+.social-float {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 998;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.social-float a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px 0 0 10px;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  transition: transform .25s ease, box-shadow .25s ease;
+  box-shadow: -2px 2px 12px rgba(0,0,0,.18);
+}
+
+.social-float a svg {
+  width: 22px;
+  height: 22px;
+  fill: #fff;
+  flex-shrink: 0;
+  transition: transform .25s ease;
+}
+
+.social-float a:hover {
+  transform: translateX(-6px);
+  color: #fff;
+  box-shadow: -4px 4px 18px rgba(0,0,0,.28);
+}
+
+.social-float a:hover svg { transform: scale(1.12); }
+
+/* tooltip label */
+.social-float a::after {
+  content: attr(data-label);
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: rgba(20,30,45,.82);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .75rem;
+  font-weight: 600;
+  padding: .25rem .6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.social-float a:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Brand colours */
+.sf-whatsapp   { background: #25D366; }
+.sf-facebook   { background: #1877F2; }
+.sf-instagram  { background: linear-gradient(160deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); }
+.sf-tiktok     { background: #010101; }
+.sf-youtube    { background: #FF0000; }
+
+/* Mobile: horizontal bar fixed to bottom */
+@media (max-width: 600px) {
+  .social-float {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    flex-direction: row;
+    transform: none;
+    gap: 0;
+  }
+
+  .social-float a {
+    flex: 1;
+    height: 50px;
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 1px solid rgba(255,255,255,.15);
+  }
+
+  .social-float a:hover { transform: none; }
+
+  .social-float a::after { display: none; }
+
+  /* Give the page body room so footer isn't hidden behind bar */
+  body { padding-bottom: 50px; }
+}
+
